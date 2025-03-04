@@ -2,7 +2,7 @@ FLAGS    = -z execstack -fno-stack-protector
 FLAGS_32 = -m32
 TARGET   = stack-L2 stack-L2-dbg 
 
-L2 = 198
+L2 = 160
  
 all: $(TARGET)
 
