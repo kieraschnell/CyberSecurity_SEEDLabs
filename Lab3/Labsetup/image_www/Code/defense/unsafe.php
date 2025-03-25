@@ -31,7 +31,7 @@ $result->bind_param("ss", $input_uname, $hashed_pwd);
 $result->execute();
 
 $result->bind_result($id, $name, $eid, $salary, $ssn);
-.
+
 if ($result->fetch()) {
 }
 
