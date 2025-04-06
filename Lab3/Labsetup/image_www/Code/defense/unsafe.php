@@ -22,9 +22,13 @@ $hashed_pwd = sha1($input_pwd);
 $conn = getDB();
 
 // do the query
-$result = $conn->query("SELECT id, name, eid, salary, ssn
+$stmt = $conn->prepare("SELECT id, name, eid, salary, ssn
                         FROM credential
-                        WHERE name= '$input_uname' and Password= '$hashed_pwd'");
+                        WHERE name = ? AND Password = ?");
+$stmt->bind_param("ss", $input_uname, $hashed_pwd);
+$stmt->execute();
+
+$result = $stmt->get_result();
 if ($result->num_rows > 0) {
   // only take the first row 
   $firstrow = $result->fetch_assoc();
@@ -33,8 +37,7 @@ if ($result->num_rows > 0) {
   $eid    = $firstrow["eid"];
   $salary = $firstrow["salary"];
   $ssn    = $firstrow["ssn"];
+} else {
+  echo "<p>Login failed: incorrect username or password.</p>";
 }
-
-// close the sql connection
-$conn->close();
 ?>
