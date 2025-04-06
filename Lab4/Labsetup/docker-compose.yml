@@ -19,8 +19,6 @@ services:
         restart: always
         cap_add:
                 - SYS_NICE  # CAP_SYS_NICE (supress an error message)
-        volumes:
-                - ./mysql_data:/var/lib/mysql
         networks:
             net-10.9.0.0:
                 ipv4_address: 10.9.0.6
